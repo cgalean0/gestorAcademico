@@ -2,6 +2,7 @@ package com.gestoracademico.gestoracademico.service;
 
 import com.gestoracademico.gestoracademico.dto.UserCreationDTO;
 import com.gestoracademico.gestoracademico.dto.UserDTO;
+import com.gestoracademico.gestoracademico.dto.UserUpdateDTO;
 import com.gestoracademico.gestoracademico.mapper.Mapper;
 import com.gestoracademico.gestoracademico.model.User;
 import com.gestoracademico.gestoracademico.repository.UserRepository;
@@ -35,12 +36,11 @@ public class UserService implements IUserService{
     }
 
     @Override
-    public UserDTO updateUser(Long id, User user) {
+    public UserDTO updateUser(Long id, UserUpdateDTO user) {
         User existClient = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("The User with the ID: " + id + "doesn't exists."));
-        existClient.setId(user.getId());
         existClient.setUserName(user.getUserName());
-        existClient.setPassword(user.getPassword());
+        existClient.setRole(user.getRole());
         userRepository.save(existClient);
         return Mapper.toDTO(existClient);
     }
@@ -48,7 +48,7 @@ public class UserService implements IUserService{
     @Override
     public void deleteUser(Long id) {
         if (!userRepository.existsById(id))
-            throw new RuntimeException("The User with the ID: " + id + "doesn't exists.");
+            throw new RuntimeException("The User with the ID: " + id + " doesn't exists.");
         userRepository.deleteById(id);
     }
 
