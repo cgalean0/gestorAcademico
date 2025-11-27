@@ -2,6 +2,7 @@ package com.gestoracademico.gestoracademico.security;
 import com.gestoracademico.gestoracademico.dto.AuthResponseDTO;
 import com.gestoracademico.gestoracademico.model.User;
 import com.gestoracademico.gestoracademico.repository.UserRepository;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import javax.naming.AuthenticationException;
 
 @Service
 public class AuthService implements IAuthService{
+    private String MESSAGE_ERROR = "Invalid user or password";
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
@@ -28,20 +30,20 @@ public class AuthService implements IAuthService{
     public AuthResponseDTO login(String userName, String plainPassword) throws AuthenticationException {
         //Search by UserName
         User user = userRepository.findByUserName(userName)
-                            .orElseThrow(() -> new UsernameNotFoundException("The user: " + userName + "Not found"));
+                            .orElseThrow(() -> new BadCredentialsException(MESSAGE_ERROR));
         String storedHash = user.getPassword();
         if (checkPassword(plainPassword, storedHash)) {
             String token = jwtProvider.generateToken(user);
             return new AuthResponseDTO(token, user.getUserName());
         } else {
-            throw new AuthenticationException("Invalid credentials.");
+            throw new BadCredentialsException(MESSAGE_ERROR);
         }
-}
+    }
 
     @Override
     public void resetPassword(String userName, String newPassword) {
         User user = userRepository.findByUserName(userName)
-                .orElseThrow(() -> new UsernameNotFoundException("The user: " + userName + "Not found"));
+                .orElseThrow(() -> new BadCredentialsException(MESSAGE_ERROR));
         user.setPassword(newPassword);
         userRepository.save(user);
     }
