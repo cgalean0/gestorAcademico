@@ -11,7 +11,7 @@ import javax.naming.AuthenticationException;
 
 @Service
 public class AuthService implements IAuthService{
-    private String MESSAGE_ERROR = "Invalid user or password";
+    private final String MESSAGE_ERROR = "Invalid user or password";
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
@@ -27,22 +27,24 @@ public class AuthService implements IAuthService{
     }
 
     @Override
-    public AuthResponseDTO login(String userName, String plainPassword) throws AuthenticationException {
+    public AuthResponseDTO login(String userEmail, String plainPassword) throws AuthenticationException {
         //Search by UserName
-        User user = userRepository.findByUserName(userName)
+        User user = userRepository.findByUserEmail(userEmail)
                             .orElseThrow(() -> new BadCredentialsException(MESSAGE_ERROR));
         String storedHash = user.getPassword();
+        // Check that the password in plain text is equal to storeHash
         if (checkPassword(plainPassword, storedHash)) {
+            //Generate a JWT token
             String token = jwtProvider.generateToken(user);
-            return new AuthResponseDTO(token, user.getUserName());
+            return new AuthResponseDTO(token, user.getUserEmail());
         } else {
             throw new BadCredentialsException(MESSAGE_ERROR);
         }
     }
 
     @Override
-    public void resetPassword(String userName, String newPassword) {
-        User user = userRepository.findByUserName(userName)
+    public void resetPassword(String userEmail, String newPassword) {
+        User user = userRepository.findByUserEmail(userEmail)
                 .orElseThrow(() -> new BadCredentialsException(MESSAGE_ERROR));
         user.setPassword(newPassword);
         userRepository.save(user);

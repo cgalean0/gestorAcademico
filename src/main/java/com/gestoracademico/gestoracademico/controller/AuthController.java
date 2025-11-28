@@ -15,14 +15,21 @@ import javax.naming.AuthenticationException;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
+
     private final IAuthService authService;
+    // Constructor and dependencies injection
     public AuthController(IAuthService authService) {
         this.authService = authService;
     }
+
+    /**
+     * Login end point
+     * @param request contains the data for the check login
+     * */
     @PostMapping("/login")
     public ResponseEntity<AuthResponseDTO> login(@RequestBody LoginRequestDTO request) {
         try {
-            AuthResponseDTO response = authService.login(request.getUserName(), request.getPassword());
+            AuthResponseDTO response = authService.login(request.getUserEmail(), request.getPassword());
             return ResponseEntity.ok(response);
         } catch (AuthenticationException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

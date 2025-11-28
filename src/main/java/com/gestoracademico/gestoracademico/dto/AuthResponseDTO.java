@@ -8,10 +8,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AuthResponseDTO {
     private String token;
-    private String userName;
+    private String userEmail;
     private String type = "bearer";
-    public AuthResponseDTO(String token, String userName) {
+    public AuthResponseDTO(String token, String userEmail) {
         this.token = token;
-        this.userName = userName;
+        this.userEmail = userEmail;
     }
 }

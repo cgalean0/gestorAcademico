@@ -30,7 +30,7 @@ public class JwtProvider {
 
     public String generateToken(User user) {
         Map<String, Object> domainClaims = new HashMap<>();
-        domainClaims.put("userId", user.getId());
+        domainClaims.put("userId", user.getIdUser());
         domainClaims.put("role", user.getRole().name());
 
         Date now = new Date();
@@ -38,7 +38,7 @@ public class JwtProvider {
 
         return Jwts.builder()
                 .claims(domainClaims)
-                .subject(user.getUserName())
+                .subject(user.getUserEmail())
                 .issuedAt(now)
                 .expiration(expirationDate)
                 .issuer("AdminGestor")
