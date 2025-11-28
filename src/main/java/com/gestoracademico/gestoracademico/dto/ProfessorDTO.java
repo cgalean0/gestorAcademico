@@ -1,19 +1,19 @@
 package com.gestoracademico.gestoracademico.dto;
 
 import com.gestoracademico.gestoracademico.enums.Role;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Getter @Setter
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserUpdateDTO {
+@Builder
+public class ProfessorDTO {
+    private Long id;
+    private String email;
     private String name;
     private String lastName;
-    private String userEmail;
     private String phone;
     private String dni;
-    private Role role;
+    private String fileNumber;
 }
