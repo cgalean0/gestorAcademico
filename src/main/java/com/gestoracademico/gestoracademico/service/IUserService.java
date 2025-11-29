@@ -20,7 +20,7 @@ public interface IUserService {
     /**
      * Returns the List of Users in the DB
      * */
-    List<UserDTO> listUsers();
+    List<UserDTO> getUsers();
 
     /**
      * Get user data by id
@@ -34,21 +34,24 @@ public interface IUserService {
     /**
      * Create a new Professor
      * */
-    UserDTO createProfessor(ProfessorCreationDTO prof);
+    UserDTO createProfessor(ProfessorCreationDTO professor);
 
     /**
      * Update a current Professor
      * */
-    UserDTO updateProfessor(Long id, ProfessorUpdateDTO prof);
+    UserDTO updateProfessor(Long id, ProfessorUpdateDTO professor);
 
     /**
      * Create a new Student
      * */
-    UserDTO createStudent(StudentCreationDTO stud);
+    UserDTO createStudent(StudentCreationDTO student);
 
     /**
      * Update a current Student
      * */
-    UserDTO updateStudent(Long id, StudentUpdateDTO stud);
+    UserDTO updateStudent(Long id, StudentUpdateDTO student);
 
+    List<StudentDTO> getStudents();
+
+    List<ProfessorDTO> getProfessors();
 }
