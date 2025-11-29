@@ -36,7 +36,7 @@ public class User {
 
     // Fiels to Students
     @Enumerated(EnumType.STRING)
-    @Column (name = "type_student", nullable = false)
+    @Column (name = "type_student", nullable = true)
     private TypeStudent typeStudent;
 
     // Roles for privileges ('ADMIN', 'STUDENT', 'PROFESSOR')

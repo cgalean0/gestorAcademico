@@ -9,12 +9,12 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProfessorCreationDTO {
+public class ProfessorUpdateDTO {
+    private String idUser;
     private String userEmail;
-    private String password;
     private String name;
     private String lastName;
-    private String phone;
     private String dni;
+    private String phone;
     private String fileNumber;
 }
