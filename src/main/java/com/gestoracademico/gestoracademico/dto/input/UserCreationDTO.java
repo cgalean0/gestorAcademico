@@ -1,4 +1,4 @@
-package com.gestoracademico.gestoracademico.dto;
+package com.gestoracademico.gestoracademico.dto.input;
 
 import lombok.*;
 

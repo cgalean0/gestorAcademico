@@ -1,4 +1,4 @@
-package com.gestoracademico.gestoracademico.dto;
+package com.gestoracademico.gestoracademico.dto.output;
 
 import com.gestoracademico.gestoracademico.enums.TypeStudent;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentUpdateDTO {
+public class StudentDTO {
     private String userEmail;
     private String name;
     private String lastName;

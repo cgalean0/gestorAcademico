@@ -1,8 +1,8 @@
 package com.gestoracademico.gestoracademico.service;
 
-import com.gestoracademico.gestoracademico.dto.SubjectCreationDTO;
-import com.gestoracademico.gestoracademico.dto.SubjectDTO;
-import com.gestoracademico.gestoracademico.dto.SubjectUpdateDTO;
+import com.gestoracademico.gestoracademico.dto.input.SubjectCreationDTO;
+import com.gestoracademico.gestoracademico.dto.output.SubjectDTO;
+import com.gestoracademico.gestoracademico.dto.input.SubjectUpdateDTO;
 import com.gestoracademico.gestoracademico.exceptions.SubjectNotFoundException;
 import com.gestoracademico.gestoracademico.mapper.SubjectMapper;
 import com.gestoracademico.gestoracademico.mapper.SubjectUpdateMapper;

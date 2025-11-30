@@ -1,7 +1,6 @@
 package com.gestoracademico.gestoracademico.security;
 
-import com.gestoracademico.gestoracademico.dto.AuthResponseDTO;
-import com.gestoracademico.gestoracademico.model.User;
+import com.gestoracademico.gestoracademico.dto.output.AuthResponseDTO;
 
 import javax.naming.AuthenticationException;
 

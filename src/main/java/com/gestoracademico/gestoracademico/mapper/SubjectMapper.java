@@ -1,7 +1,7 @@
 package com.gestoracademico.gestoracademico.mapper;
 
-import com.gestoracademico.gestoracademico.dto.SubjectCreationDTO;
-import com.gestoracademico.gestoracademico.dto.SubjectDTO;
+import com.gestoracademico.gestoracademico.dto.input.SubjectCreationDTO;
+import com.gestoracademico.gestoracademico.dto.output.SubjectDTO;
 import com.gestoracademico.gestoracademico.model.Subject;
 import org.mapstruct.Mapper;
 

@@ -1,9 +1,8 @@
 package com.gestoracademico.gestoracademico.security;
-import com.gestoracademico.gestoracademico.dto.AuthResponseDTO;
+import com.gestoracademico.gestoracademico.dto.output.AuthResponseDTO;
 import com.gestoracademico.gestoracademico.model.User;
 import com.gestoracademico.gestoracademico.repository.UserRepository;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

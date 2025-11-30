@@ -1,6 +1,5 @@
-package com.gestoracademico.gestoracademico.dto;
+package com.gestoracademico.gestoracademico.dto.output;
 
-import com.gestoracademico.gestoracademico.enums.Role;
 import lombok.*;
 
 @Getter

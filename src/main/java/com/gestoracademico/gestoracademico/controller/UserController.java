@@ -1,7 +1,7 @@
 package com.gestoracademico.gestoracademico.controller;
 
-import com.gestoracademico.gestoracademico.dto.*;
-import com.gestoracademico.gestoracademico.model.User;
+import com.gestoracademico.gestoracademico.dto.input.*;
+import com.gestoracademico.gestoracademico.dto.output.UserDTO;
 import com.gestoracademico.gestoracademico.service.IUserService;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;

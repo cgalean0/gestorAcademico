@@ -1,9 +1,8 @@
 package com.gestoracademico.gestoracademico.controller;
 
-import com.gestoracademico.gestoracademico.dto.SubjectCreationDTO;
-import com.gestoracademico.gestoracademico.dto.SubjectDTO;
-import com.gestoracademico.gestoracademico.dto.SubjectUpdateDTO;
-import com.gestoracademico.gestoracademico.model.Subject;
+import com.gestoracademico.gestoracademico.dto.input.SubjectCreationDTO;
+import com.gestoracademico.gestoracademico.dto.output.SubjectDTO;
+import com.gestoracademico.gestoracademico.dto.input.SubjectUpdateDTO;
 import com.gestoracademico.gestoracademico.service.ISubjectService;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;

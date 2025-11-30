@@ -1,7 +1,7 @@
 package com.gestoracademico.gestoracademico.controller;
 
-import com.gestoracademico.gestoracademico.dto.AuthResponseDTO;
-import com.gestoracademico.gestoracademico.dto.LoginRequestDTO;
+import com.gestoracademico.gestoracademico.dto.output.AuthResponseDTO;
+import com.gestoracademico.gestoracademico.dto.input.LoginRequestDTO;
 import com.gestoracademico.gestoracademico.security.IAuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
 package com.gestoracademico.gestoracademico.mapper;
 
-import com.gestoracademico.gestoracademico.dto.SubjectUpdateDTO;
+import com.gestoracademico.gestoracademico.dto.input.SubjectUpdateDTO;
 import com.gestoracademico.gestoracademico.model.Subject;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

@@ -1,4 +1,4 @@
-package com.gestoracademico.gestoracademico.dto;
+package com.gestoracademico.gestoracademico.dto.output;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SubjectCreationDTO {
-    private String code;
+public class CareerDTO {
     private String name;
+    private int duration;
 }

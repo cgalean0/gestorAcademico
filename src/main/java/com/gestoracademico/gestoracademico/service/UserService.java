@@ -1,6 +1,7 @@
 package com.gestoracademico.gestoracademico.service;
 
-import com.gestoracademico.gestoracademico.dto.*;
+import com.gestoracademico.gestoracademico.dto.input.*;
+import com.gestoracademico.gestoracademico.dto.output.UserDTO;
 import com.gestoracademico.gestoracademico.enums.Role;
 import com.gestoracademico.gestoracademico.exceptions.UserNotFoundException;
 import com.gestoracademico.gestoracademico.mapper.UserMapper;

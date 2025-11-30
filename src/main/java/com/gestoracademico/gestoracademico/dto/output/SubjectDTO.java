@@ -1,4 +1,4 @@
-package com.gestoracademico.gestoracademico.dto;
+package com.gestoracademico.gestoracademico.dto.output;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
