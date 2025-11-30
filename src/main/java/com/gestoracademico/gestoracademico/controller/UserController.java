@@ -1,6 +1,7 @@
 package com.gestoracademico.gestoracademico.controller;
 
 import com.gestoracademico.gestoracademico.dto.*;
+import com.gestoracademico.gestoracademico.model.User;
 import com.gestoracademico.gestoracademico.service.IUserService;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -8,8 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/users")
 public class UserController {
 
     private final IUserService userService;
@@ -18,7 +21,14 @@ public class UserController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping("/users/{id}")
+    @PostMapping
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserCreationDTO user) {
+        UserDTO createdUser = userService.createUser(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         try {
             userService.deleteUser(id);
@@ -31,53 +41,79 @@ public class UserController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/users/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserUpdateDTO user) {
         UserDTO updatedUser = userService.updateUser(id, user);
         return ResponseEntity.ok(updatedUser);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/admin/professor")
+    @PostMapping("/admin/professors")
     public ResponseEntity<UserDTO> createProfessor(@RequestBody ProfessorCreationDTO professor) {
         UserDTO createdProfessor = userService.createProfessor(professor);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdProfessor);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/admin/professor/{id}")
+    @PutMapping("/admin/professors/{id}")
     public ResponseEntity<UserDTO> updateProfessor(@PathVariable Long id, @RequestBody ProfessorUpdateDTO professor) {
         UserDTO updatedProfessor = userService.updateProfessor(id, professor);
         return ResponseEntity.ok(updatedProfessor);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/admin/student")
+    @PostMapping("/admin/students")
     public ResponseEntity<UserDTO> createStudent(@RequestBody StudentCreationDTO student) {
         UserDTO createdStudent = userService.createStudent(student);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdStudent);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/admin/student/{id}")
+    @PutMapping("/admin/students/{id}")
     public ResponseEntity<UserDTO> updateStudent(@PathVariable Long id, @RequestBody StudentUpdateDTO student) {
         UserDTO updatedStudent = userService.updateStudent(id, student);
         return ResponseEntity.ok(updatedStudent);
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR')")
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
         UserDTO foundUser = userService.getUserById(id);
         return ResponseEntity.ok(foundUser);
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR')")
-    @GetMapping("/users/email/{email}")
+    @GetMapping("/email/{email}")
     public ResponseEntity<UserDTO> getUserByEmail(@PathVariable String email) {
         UserDTO foundUser = userService.getUserByEmail(email);
         return ResponseEntity.ok(foundUser);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping
+    public ResponseEntity<List<UserDTO>> getUsers() {
+        List<UserDTO> userDTOList = userService.getUsers();
+        return ResponseEntity.ok(userDTOList);
+    }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'TEACHER')")
+    @GetMapping("/role/students")
+    public ResponseEntity<List<UserDTO>> getStudents() {
+        List<UserDTO> studentsDTOList = userService.getStudents();
+        return ResponseEntity.ok(studentsDTOList);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/role/professors")
+    public ResponseEntity<List<UserDTO>> getProfessors() {
+        List<UserDTO> professorsDTOList = userService.getProfessors();
+        return ResponseEntity.ok(professorsDTOList);
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/me")
+    public ResponseEntity<UserDTO> getMyProfile(java.security.Principal principal) {
+        UserDTO userProfile = userService.getUserByEmail(principal.getName());
+        return ResponseEntity.ok(userProfile);
+    }
 }

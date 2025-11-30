@@ -60,7 +60,7 @@ public class UserService implements IUserService{
     }
 
     @Override
-    public List<UserDTO> listUsers() {
+    public List<UserDTO> getUsers() {
         return userRepository.findAll()
                 .stream()
                 .map(userMapper::toDTO)
@@ -118,5 +118,21 @@ public class UserService implements IUserService{
         userUpdateMapper.updateEntityToDto(student, existingStudent);
         User updatedStudent = userRepository.save(existingStudent);
         return userMapper.toDTO(updatedStudent);
+    }
+
+    @Override
+    public List<UserDTO> getStudents() {
+        return userRepository.findByRole(Role.STUDENT)
+                .stream()
+                .map(userMapper::toDTO)
+                .toList();
+    }
+
+    @Override
+    public List<UserDTO> getProfessors() {
+        return userRepository.findByRole(Role.PROFESSOR)
+                .stream()
+                .map(userMapper::toDTO)
+                .toList();
     }
 }

@@ -51,7 +51,14 @@ public interface IUserService {
      * */
     UserDTO updateStudent(Long id, StudentUpdateDTO student);
 
-    List<StudentDTO> getStudents();
+    /**
+     * Get a list of students
+     * */
+    List<UserDTO> getStudents();
 
-    List<ProfessorDTO> getProfessors();
+    /**
+     * Get a list of professors
+     * */
+    List<UserDTO> getProfessors();
+
 }

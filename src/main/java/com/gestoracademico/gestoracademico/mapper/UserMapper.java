@@ -1,9 +1,6 @@
 package com.gestoracademico.gestoracademico.mapper;
 
-import com.gestoracademico.gestoracademico.dto.ProfessorCreationDTO;
-import com.gestoracademico.gestoracademico.dto.StudentCreationDTO;
-import com.gestoracademico.gestoracademico.dto.UserCreationDTO;
-import com.gestoracademico.gestoracademico.dto.UserDTO;
+import com.gestoracademico.gestoracademico.dto.*;
 import com.gestoracademico.gestoracademico.model.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,7 +9,6 @@ import org.mapstruct.Mapping;
 public interface UserMapper {
     /// Mapeo a DTO
     UserDTO toDTO(User entity);
-
     /// Mapeo de creación genérica
     /// Ignoramos password para no copiar el texto plano del DTO al Entity
     @Mapping(target = "password", ignore = true)
