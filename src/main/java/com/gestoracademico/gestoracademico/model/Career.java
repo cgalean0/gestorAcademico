@@ -15,7 +15,7 @@ import lombok.Setter;
 public class Career {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idCareer;
     @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "duration", nullable = false)
