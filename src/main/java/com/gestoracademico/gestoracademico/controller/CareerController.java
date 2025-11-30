@@ -4,6 +4,7 @@ import com.gestoracademico.gestoracademico.dto.input.CareerCreationDTO;
 import com.gestoracademico.gestoracademico.dto.input.CareerUpdateDTO;
 import com.gestoracademico.gestoracademico.dto.output.CareerDTO;
 import com.gestoracademico.gestoracademico.service.ICareerService;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,9 +28,9 @@ public class CareerController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCareer);
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN)")
+    @PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR')")
     @PutMapping("/{id}")
-    public ResponseEntity<CareerDTO> updatCareer(@PathVariable Long id, @RequestBody CareerUpdateDTO career) {
+    public ResponseEntity<CareerDTO> updateCareer(@PathVariable Long id, @RequestBody CareerUpdateDTO career) {
         CareerDTO updatedCareer = careerService.updateCareer(id, career);
         return ResponseEntity.ok(updatedCareer);
     }
@@ -49,7 +50,13 @@ public class CareerController {
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCareer(@PathVariable Long id) {
-        careerService.deleteCareer(id);
-        return ResponseEntity.noContent().build();
+        try {
+            careerService.deleteCareer(id);
+            return ResponseEntity.noContent().build();
+        } catch (EmptyResultDataAccessException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }
