@@ -8,9 +8,11 @@ import com.gestoracademico.gestoracademico.mapper.SubjectMapper;
 import com.gestoracademico.gestoracademico.mapper.SubjectUpdateMapper;
 import com.gestoracademico.gestoracademico.model.Subject;
 import com.gestoracademico.gestoracademico.repository.SubjectRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class SubjectService implements ISubjectService{
 
     private final SubjectRepository subjectRepository;

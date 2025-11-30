@@ -8,9 +8,10 @@ import com.gestoracademico.gestoracademico.mapper.CareerMapper;
 import com.gestoracademico.gestoracademico.mapper.CareerUpdateMapper;
 import com.gestoracademico.gestoracademico.model.Career;
 import com.gestoracademico.gestoracademico.repository.CareerRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class CareerService implements ICareerService{
     private final CareerRepository careerRepository;
     private final CareerMapper careerMapper;
