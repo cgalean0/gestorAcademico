@@ -28,6 +28,6 @@ public class StudyPlan implements Serializable {
     @JoinColumn(name = "subject_id", insertable = false, updatable = false)
     private Subject subject;
 
-    @Column(name = "year")
+    @Column(name = "study_year")
     private Integer year;
 }

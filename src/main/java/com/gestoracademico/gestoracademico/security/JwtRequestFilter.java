@@ -29,7 +29,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         String token = null;
         String username = null;
         //Comprobar el formato del token (que sea Bearer)
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+        if (authHeader != null && authHeader.startsWith("Bearer")) {
             token = authHeader.substring(7);
             // Intentamos validacion y extracción.
             if (jwtProvider.validateToken(token)) {

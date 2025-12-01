@@ -27,7 +27,7 @@ public class SubjectController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdSubject);
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'TEACHER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR')")
     @PutMapping("/{id}")
     public ResponseEntity<SubjectDTO> updateSubject(@PathVariable Long id, @RequestBody SubjectUpdateDTO subject) {
         SubjectDTO updatedSubject = subjectService.updateSubject(id, subject);

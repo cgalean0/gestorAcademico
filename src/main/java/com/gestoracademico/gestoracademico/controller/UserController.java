@@ -96,7 +96,7 @@ public class UserController {
         return ResponseEntity.ok(userDTOList);
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'TEACHER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR')")
     @GetMapping("/role/students")
     public ResponseEntity<List<UserDTO>> getStudents() {
         List<UserDTO> studentsDTOList = userService.getStudents();
