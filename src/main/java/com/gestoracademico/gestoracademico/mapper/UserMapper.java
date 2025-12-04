@@ -17,7 +17,7 @@ public interface UserMapper {
     @Mapping(target = "password", ignore = true)
     User toEntity(UserCreationDTO dto);
 
-    /// Mapeo de creacion de professor
+    /// Mapeo de creacion de assistant
     /// Role y password son asignados en el service
     @Mapping(target = "role", ignore = true)
     @Mapping(target = "password", ignore = true)
