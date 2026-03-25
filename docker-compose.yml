@@ -1,0 +1,83 @@
+services:
+  db:
+    image: mariadb:latest
+    container_name: gestoracademico-db
+    environment:
+      MARIADB_ROOT_PASSWORD: rootpassword
+      MARIADB_DATABASE: gestoracademico
+      MARIADB_USER: gestoruser
+      MARIADB_PASSWORD: gestorpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - universidad-network
+
+  app:
+    build:
+      context: ./gestorAcademico
+      dockerfile: Dockerfile
+    container_name: gestoracademico-app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:mariadb://db:3306/gestoracademico
+      SPRING_DATASOURCE_USERNAME: gestoruser
+      SPRING_DATASOURCE_PASSWORD: gestorpassword
+      SPRING_REDIS_HOST: redis_db
+      SPRING_REDIS_PORT: 6379
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - universidad-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: gestoracademico-frontend
+    depends_on:
+      app:
+        condition: service_healthy
+    ports:
+      - "4200:80"
+    networks:
+      - universidad-network
+
+  redis_db:
+    image: redis:7.2-alpine
+    container_name: black_list
+    restart: always
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - universidad-network
+
+networks:
+  universidad-network:
+    driver: bridge
+
+volumes:
+  mariadb_data:
+  redis_data:

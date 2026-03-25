@@ -1,0 +1,267 @@
+<div class="professor-dashboard">
+  <div class="admin-layout">
+    <!-- ========== SIDEBAR ========== -->
+    <aside class="sidebar">
+      <div class="sidebar__logo">
+        <h2>📚 Gestor<span>Academic</span></h2>
+      </div>
+
+      <ul class="nav-list">
+        <li class="nav-item">
+          <button
+            class="nav-item__button"
+            [class.active]="seccionActual === 'mis-cursos'"
+            (click)="navegarA('mis-cursos')"
+          >
+            <span class="nav-item__icon">📖</span>
+            Mis Cursos
+          </button>
+        </li>
+        <li class="nav-item">
+          <button
+            class="nav-item__button"
+            [class.active]="seccionActual === 'asistencia'"
+            (click)="navegarA('asistencia')"
+          >
+            <span class="nav-item__icon">✅</span>
+            Asistencia
+          </button>
+        </li>
+        <li class="nav-item">
+          <button
+            class="nav-item__button"
+            [class.active]="seccionActual === 'calificaciones'"
+            (click)="navegarA('calificaciones')"
+          >
+            <span class="nav-item__icon">📝</span>
+            Calificaciones
+          </button>
+        </li>
+        <li class="nav-item">
+          <button
+            class="nav-item__button"
+            [class.active]="seccionActual === 'mi-perfil'"
+            (click)="navegarA('mi-perfil')"
+          >
+            <span class="nav-item__icon">👤</span>
+            Mi Perfil
+          </button>
+        </li>
+      </ul>
+
+      <div class="sidebar__footer">
+        <button class="btn btn--ghost" style="width: 100%" (click)="onLogout()">🚪 Cerrar Sesión</button>
+      </div>
+    </aside>
+
+    <!-- ========== HEADER ========== -->
+    <header class="header">
+      <div class="header__title">
+        <h1>Panel del Profesor</h1>
+        <span class="badge">Profesor</span>
+      </div>
+
+      <div class="header__user">
+        <div class="header__info">
+          <div class="header__name">Nombre del Profesor</div>
+          <div class="header__role">Profesor</div>
+        </div>
+        <div class="header__avatar">PR</div>
+        <div class="header__actions">
+          <button class="btn btn--ghost btn--sm">🔔</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="main-container">
+      <div class="content">
+        <!-- ========== SECCIÓN: MIS CURSOS ========== -->
+        <section id="mis-cursos" class="section" [class.hidden]="seccionActual !== 'mis-cursos'">
+          <div class="section__header">
+            <h2 class="section__title">Mis Cursos</h2>
+            <span class="section__meta">Total: 0 cursos asignados</span>
+          </div>
+
+          <div class="course-grid">
+            <!-- Placeholder course card -->
+            <div class="course-card">
+              <div class="course-card__header">
+                <div>
+                  <h3 class="course-card__title">Nombre del Curso</h3>
+                  <span class="course-card__code">CUR-101</span>
+                </div>
+              </div>
+              <div class="course-card__info">
+                <div class="course-card__stat">📅 Lunes y Miércoles 08:00 - 10:00</div>
+                <div class="course-card__stat">👥 25 estudiantes inscriptos</div>
+                <div class="course-card__stat">📍 Aula 301</div>
+              </div>
+              <div class="course-card__actions">
+                <button class="btn btn--secondary btn--sm">Ver Estudiantes</button>
+                <button class="btn btn--secondary btn--sm">Tomar Asistencia</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== SECCIÓN: ASISTENCIA ========== -->
+        <section id="asistencia" class="section" [class.hidden]="seccionActual !== 'asistencia'">
+          <div class="section__header">
+            <h2 class="section__title">Asistencia</h2>
+          </div>
+
+          <div class="toolbar">
+            <select class="form-input" style="min-width: 200px">
+              <option value="">Seleccionar curso</option>
+            </select>
+            <input type="date" class="form-input" style="min-width: 180px" />
+            <button class="btn btn--primary">Cargar Asistencia</button>
+          </div>
+
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Estudiante</th>
+                  <th>Estado</th>
+                  <th>Observación</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td
+                    colspan="3"
+                    style="text-align: center; padding: 3rem; color: var(--color-text-muted)"
+                  >
+                    Seleccioná un curso y fecha para tomar asistencia.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ========== SECCIÓN: CALIFICACIONES ========== -->
+        <section
+          id="calificaciones"
+          class="section"
+          [class.hidden]="seccionActual !== 'calificaciones'"
+        >
+          <div class="section__header">
+            <h2 class="section__title">Calificaciones</h2>
+          </div>
+
+          <div class="toolbar">
+            <select class="form-input" style="min-width: 200px">
+              <option value="">Seleccionar curso</option>
+            </select>
+            <select class="form-input" style="min-width: 200px">
+              <option value="">Seleccionar evaluación</option>
+            </select>
+            <button class="btn btn--primary">Cargar Notas</button>
+          </div>
+
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Estudiante</th>
+                  <th>Nota</th>
+                  <th>Observación</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td
+                    colspan="3"
+                    style="text-align: center; padding: 3rem; color: var(--color-text-muted)"
+                  >
+                    Seleccioná un curso y evaluación para cargar calificaciones.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ========== SECCIÓN: MI PERFIL ========== -->
+        <section id="mi-perfil" class="section" [class.hidden]="seccionActual !== 'mi-perfil'">
+          <div class="section__header">
+            <h2 class="section__title">Mi Perfil</h2>
+          </div>
+
+          <form (submit)="actualizarPerfil($event)">
+            <div class="form-section">
+              <h3 class="form-section__legend">Información Personal</h3>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="nombre">Nombre</label>
+                  <input type="text" id="nombre" class="form-input" placeholder="Tu nombre" />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="apellido">Apellido</label>
+                  <input type="text" id="apellido" class="form-input" placeholder="Tu apellido" />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="email">Email</label>
+                  <input type="email" id="email" class="form-input" placeholder="tu@email.com" />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="telefono">Teléfono</label>
+                  <input
+                    type="tel"
+                    id="telefono"
+                    class="form-input"
+                    placeholder="+54 11 1234-5678"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <h3 class="form-section__legend">Cambiar Contraseña</h3>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="passwordActual">Contraseña Actual</label>
+                  <input
+                    type="password"
+                    id="passwordActual"
+                    class="form-input"
+                    placeholder="••••••••"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="nuevaPassword">Nueva Contraseña</label>
+                  <input
+                    type="password"
+                    id="nuevaPassword"
+                    class="form-input"
+                    placeholder="••••••••"
+                  />
+                  <span class="form-hint">Mínimo 8 caracteres</span>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="confirmarPassword">Confirmar Contraseña</label>
+                  <input
+                    type="password"
+                    id="confirmarPassword"
+                    class="form-input"
+                    placeholder="••••••••"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn--primary">✏️ Actualizar Perfil</button>
+          </form>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>

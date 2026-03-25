@@ -1,0 +1,137 @@
+<div class="auth-wrapper">
+  <!-- Decorative background pattern -->
+  <div class="bg-pattern" aria-hidden="true"></div>
+
+  <!-- Left side - Branding -->
+  <aside class="brand-section">
+    <div class="brand-content">
+      <div class="logo-mark">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect
+            x="4"
+            y="8"
+            width="40"
+            height="32"
+            rx="2"
+            stroke="currentColor"
+            stroke-width="2.5"
+          />
+          <path d="M4 16h40" stroke="currentColor" stroke-width="2.5" />
+          <path
+            d="M14 24h20M14 30h12"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </div>
+      <h1 class="brand-title">Gestor<br />Académico</h1>
+      <p class="brand-tagline">Sistema de gestión integral para instituciones educativas</p>
+    </div>
+    <div class="brand-footer">
+      <span class="brand-year">2026</span>
+    </div>
+  </aside>
+
+  <!-- Right side - Login form -->
+  <main class="form-section">
+    <div class="form-container">
+      <header class="form-header">
+        <h2 class="form-title">Bienvenido</h2>
+        <p class="form-subtitle">Ingresá tus credenciales para continuar</p>
+      </header>
+
+      <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="field-group">
+          <label for="userName" class="field-label">Usuario</label>
+          <div class="field-row">
+            <div class="input-wrapper">
+              <svg
+                class="input-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
+              </svg>
+              <input
+                type="text"
+                id="userName"
+                class="field-input"
+                [class.is-invalid]="userName?.invalid && userName?.touched"
+                placeholder="Tu nombre de usuario"
+                formControlName="userName"
+                autocomplete="username"
+                required
+              />
+            </div>
+            @if (userName?.invalid && userName?.touched) {
+              <div class="field-error">
+                @if (userName?.hasError('required')) {
+                  <span>Ups, parece que te olvidaste del usuario.</span>
+                } @else if (userName?.hasError('pattern')) {
+                  <span>Solo letras y números, sin símbolos ni espacios.</span>
+                } @else if (userName?.hasError('minlength')) {
+                  <span>El usuario es un poco corto, necesita al menos 4 caracteres.</span>
+                } @else if (userName?.hasError('maxlength')) {
+                  <span>El usuario es muy largo, máximo 30 caracteres.</span>
+                }
+              </div>
+            }
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="passwd" class="field-label">Contraseña</label>
+          <div class="field-row">
+            <div class="input-wrapper">
+              <svg
+                class="input-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="5" y="11" width="14" height="10" rx="2" />
+                <path d="M8 11V7a4 4 0 018 0v4" />
+              </svg>
+              <input
+                type="password"
+                id="passwd"
+                class="field-input"
+                [class.is-invalid]="passwd?.invalid && passwd?.touched"
+                placeholder="Tu contraseña"
+                formControlName="passwd"
+                autocomplete="current-password"
+              />
+            </div>
+            @if (passwd?.invalid && passwd?.touched) {
+              <div class="field-error">
+                @if (passwd?.hasError('required')) {
+                  <span>No te olvides de la contraseña.</span>
+                } @else if (passwd?.hasError('minlength')) {
+                  <span>La contraseña necesita al menos 8 caracteres.</span>
+                }
+              </div>
+            }
+          </div>
+        </div>
+        <button type="submit" class="submit-btn" [disabled]="!loginForm.valid">
+          <span>Ingresar</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </button>
+      </form>
+
+      <footer class="form-footer">
+        <p class="help-text">
+          ¿Necesitás ayuda?
+          <a href="#" class="help-link">Contactá al soporte</a>
+        </p>
+      </footer>
+    </div>
+  </main>
+</div>
